@@ -1,3 +1,5 @@
+[![CLA assistant](https://cla-assistant.percona.com/readme/badge/Percona-Lab/pmm-ruled)](https://cla-assistant.percona.com/Percona-Lab/pmm-ruled)
+
 # PMM-RULED
 
 <img src="images/pmm-ruled-overview.png" width="600">
