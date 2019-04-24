@@ -199,8 +199,10 @@ func FlushAlert() error {
 	ruleString += fmt.Sprintln("  rules:")
 
 	// generate rule (body)
+	re := regexp.MustCompile(`\s+`)
 	for _, rule := range AlertRules {
 
+		rule.Rule = re.ReplaceAllString(rule.Rule, " ")
 		expr := fmt.Sprintf(`round(%s, 0.01) %s on (instance) group_left (level, name, gname) (alert_rule_threshold{name="%s", level="%s"} and (alert_rule_activate{name="%s", level="%s"} == 1))`, rule.Rule, rule.Opr, rule.Name, rule.Level, rule.Name, rule.Level)
 
 		rule.Subject = regexp.MustCompile(`"`).ReplaceAllString(rule.Subject, `\"`)

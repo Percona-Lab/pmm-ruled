@@ -22,6 +22,7 @@ import (
 	"os/exec"
 	"pmm-ruled/common"
 	"pmm-ruled/model"
+	"regexp"
 
 	"github.com/gin-gonic/gin"
 )
@@ -205,10 +206,11 @@ func FlushRecord() error {
 		ruleString += fmt.Sprintln("  rules:")
 
 		// generate rule (body)
+		re := regexp.MustCompile(`\s+`)
 		for _, rule := range RecordRules {
 
 			if seq == 0 {
-				// raw record
+				rule.Query = re.ReplaceAllString(rule.Query, " ")
 				ruleString += fmt.Sprintln("  - record: " + common.RecRawName + ":" + rule.Name)
 				ruleString += fmt.Sprintln("    expr:  ")
 				ruleString += fmt.Sprintln("      " + rule.Query)
